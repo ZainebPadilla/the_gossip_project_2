@@ -60,6 +60,20 @@ class GossipsController < ApplicationController
     redirect_to gossips_path, notice: 'Potin supprimé avec succès !'
   end
 
+  def like
+    @gossip = Gossip.find(params[:id])
+    @gossip.like! if current_user 
+
+    redirect_to gossip_path(@gossip)
+  end
+
+  def dislike
+    @gossip = Gossip.find(params[:id])
+    @gossip.dislike! if current_user 
+    redirect_to gossip_path(@gossip)
+  end
+
+
   private
 
   def gossip_params

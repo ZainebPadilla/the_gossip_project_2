@@ -23,6 +23,10 @@ Rails.application.routes.draw do
   
   resources :gossips
   resources :gossips do
+    member do
+      post 'like'
+      delete 'dislike'
+    end
     resources :comments, only: [:create, :edit, :update, :destroy]
   end
 
@@ -33,3 +37,4 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create" # Route pour la création de session
   delete "logout", to: "sessions#destroy", as: "logout" #Route pour la déconnexion
 end
+

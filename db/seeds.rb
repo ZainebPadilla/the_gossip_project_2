@@ -40,7 +40,8 @@ end
   Gossip.create(
     title: Faker::Movie.title,
     content: Faker::TvShows::DrWho.quote,
-    user_id: rand(1..10) # Assurez-vous que l'utilisateur existe
+    user_id: rand(1..10),
+    likes: 0
   )
 end
 
