@@ -9,6 +9,7 @@
 #   end
 require 'faker'
 
+Comment.destroy_all
 PrivateMessage.destroy_all
 TaggedGossip.destroy_all
 Tag.destroy_all
@@ -32,9 +33,10 @@ City.destroy_all
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       description: Faker::Lorem.paragraph,
-      email: Faker::Internet.email,
+      email: Faker::Internet.unique.email,
       age: Faker::Number.between(from: 18, to: 65),
-      city: cities.sample # Associer à une ville aléatoire
+      city: cities.sample,      
+      password: 'password'
     )
   end
   
@@ -42,6 +44,33 @@ City.destroy_all
     Gossip.create(
       title: Faker::Book.title,
       content: Faker::Lorem.paragraph,
-      user: User.order('RANDOM()').first # Associe à un utilisateur aléatoire
+      user: User.order('RANDOM()').first
     )
   end
+
+  50.times do |index|
+    Comment.create(
+      content: Faker::Books::Lovecraft.sentence,  
+      user_id: rand(1..10),                        
+      gossip_id: rand(1..20) 
+    )
+  end
+
+  10.times do |index|
+    Tag.create(id: index+1, title: "#{Faker::Emotion.noun}")
+  end
+  
+  
+  20.times do |index|
+    gossip = Gossip.find(index+1)
+    tag = Tag.find(rand(1..10))
+    TaggedGossip.create(id: index+1, gossip_id: gossip.id, tag_id: tag.id)
+  end
+  
+  
+  
+  20.times do |index|
+    content = Faker::Books::Dune.quote
+    PrivateMessage.create(id: index+1, content: content, recipient_id: rand(1..10), sender_id: rand(1..10))
+  end
+  

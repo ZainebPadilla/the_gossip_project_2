@@ -1,15 +1,14 @@
 
-
-<h1>Gossips Index</h1>
+<h1>Gossips Index</h1> 
 <div class="container">
   <div class="row">
     <% @gossips.each do |gossip| %>
-      <div class="col-md-4 mb-4"> <!-- Chaque potin dans une colonne individuelle -->
+      <div class="col-12 mb-4"> <!-- Largeur complète pour une seule carte par ligne -->
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">
-            <%= link_to gossip.title, gossip_path(gossip) %>
-            <span class="small"> <br> <%= link_to gossip.user.name, user_path(gossip.user) %></span>
+              <%= link_to gossip.title, gossip_path(gossip) %>
+              <span class="small"><br><%= link_to gossip.user.name, user_path(gossip.user) %></span>
             </h5>
             <p class="card-text"><%= gossip.content.truncate(100) %></p> <!-- Aperçu du contenu -->
           </div>
@@ -17,4 +16,4 @@
       </div>
     <% end %>
   </div>
-</div>  
+</div>

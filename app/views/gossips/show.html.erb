@@ -13,10 +13,30 @@
       <p class="card-text">
         <small class="text-muted">Créé le : <%= @gossip.created_at.strftime("%d/%m/%Y") %></small>
       </p>
-      <p></p>
-      <%= link_to 'Modifier ce potin', edit_gossip_path(@gossip), class: 'btn btn-warning' %>
-      <%= link_to 'Supprimer ce potin', gossip_path(@gossip), method: :delete, data: { confirm: 'Es-tu sûr ?' }, class: 'btn btn-danger' %>
+     
+       <div class="comment_section">
+        Commentaires
+        <% 
+        @comments.each do |comment| 
+            comment_author = User.find comment.user_id
+            comment_author_name = comment_author.name
+            comment_content = comment.content
+        %>
 
+        <div class="comment_card">
+            <%= comment_author_name %><br>
+            <%= comment_content%>
+        </div>
+
+        <%end%>
+
+    </div>
+        
+      <%= link_to 'Modifier ce potin', edit_gossip_path(@gossip), class: 'btn btn-warning' %>
+        <a href="<%= gossip_path(@gossip) %>" class="btn" onclick="event.preventDefault(); if(confirm('Êtes-vous sûr de vouloir supprimer ce potin ?')) { document.getElementById('delete-form-<%= @gossip.id %>').submit(); }">Supprimer</a>
+  
+  <%= form_with(model: @gossip, method: :delete, local: true, id: "delete-form-#{@gossip.id}", style: "display: none;") do |form| %>
+  <% end %>
 
     </div>
   </div>

@@ -1,7 +1,12 @@
 class GossipsController < ApplicationController
+  before_action :authenticate_user, only: [:index, :new, :create, :edit, :update, :destroy]
+
+  
   def index
     @gossips = Gossip.all
   end
+
+  
 
   def show
     @gossip = Gossip.find(params[:id])
@@ -15,8 +20,9 @@ class GossipsController < ApplicationController
   def create
     filtered_params = params.except(:authenticity_token, :commit) # Exclure les paramètres indésirables
   @gossip = Gossip.new(filtered_params.permit(:title, :content))
-  @gossip.user = User.find_by(first_name: "anonymous") || User.first
-   
+  
+  @gossip = current_user.gossips.build(gossip_params)
+
     if @gossip.save # essaie de sauvegarder en base @gossip
       # si ça marche, il redirige vers la page d'index du site
       flash[:notice] = 'The super potin was successfully saved!'
@@ -55,5 +61,13 @@ class GossipsController < ApplicationController
 
   def gossip_params
     params.require(:gossip).permit(:title, :content)
+  end
+
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
   end
 end

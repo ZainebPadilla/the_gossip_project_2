@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/destroy"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -28,4 +31,10 @@ Rails.application.routes.draw do
 
   resources :users
   resources :cities
+
+  resources :sessions, only: [:new, :create, :destroy]
+
+  get "login", to: "sessions#new", as: "login"# Route pour la connexion
+  post "login", to: "sessions#create" # Route pour la création de session
+  delete "logout", to: "sessions#destroy", as: "logout" #Route pour la déconnexion
 end
