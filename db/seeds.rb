@@ -40,20 +40,23 @@ City.destroy_all
     )
   end
   
+  gossips = []
   20.times do
-    Gossip.create(
+    gossips << Gossip.create(
       title: Faker::Book.title,
       content: Faker::Lorem.paragraph,
-      user: User.order('RANDOM()').first
+      user: User.order('RANDOM()').first # Associe à un utilisateur aléatoire
     )
   end
 
-  50.times do |index|
-    Comment.create(
-      content: Faker::Books::Lovecraft.sentence,  
-      user_id: rand(1..10),                        
-      gossip_id: rand(1..20) 
-    )
+  gossips.each do |gossip|
+    3.times do 
+      Comment.create(
+        content: Faker::Books::Lovecraft.sentence,
+        user_id: rand(1..10),
+        gossip_id: gossip.id # Utiliser le gossip actuel
+      )
+    end
   end
 
   10.times do |index|
