@@ -48,7 +48,7 @@ class GossipsController < ApplicationController
     @gossip = Gossip.find(params[:id])
     @gossip.destroy
     flash[:notice] = 'Potin supprimé !'
-    redirect_to gossips_path
+    redirect_to gossips_path, notice: 'Potin supprimé avec succès !'
   end
 
   private
