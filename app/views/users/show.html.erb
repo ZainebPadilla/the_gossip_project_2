@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title">Profil de <%= @user.name %></h1>
+      <p class="card-text">
+        <strong>Email :</strong> <%= @user.email %> <br>
+        <strong>Âge :</strong> <%= @user.age %> <br>
+        <strong>Ville :</strong> <%= @user.city.name %> <br>
+        <strong>Description :</strong> <%= @user.description %>
+        <strong>Ville :</strong> <%= link_to @user.city.name, city_path(@user.city) %>
+      </p>
+    </div>
+  </div>
+</div>

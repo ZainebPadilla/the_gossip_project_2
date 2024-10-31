@@ -1,0 +1,193 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ h1 {
+    color:grey;
+    text-align: center;
+    margin-bottom: 30px
+}
+
+.container {
+    padding-top: 40px;
+  }
+
+  /* Styles partie équipe */
+.team-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px; /* espace entre les cards */
+  }
+  
+  .card {
+    border: none;
+    border-radius: 10px;
+    
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .card-img-top {
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .card-title {
+    font-weight: bold;
+    color: #343a40;
+    text-align: center;
+  }
+  
+  .card-text {
+    color: #6c757d;
+    font-size: 0.9rem;
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  .form-container {
+    margin-top: 50px;
+  }
+
+  /*section#contact {*/
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+  /* Style global */
+  body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8f3ee;
+      
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+  }
+  
+  /* Conteneur principal du formulaire */
+  .form-box {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px 20px;
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto;
+  }
+  
+  /* Centrage et espacement du titre */
+  form h1 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+  }
+  
+  .separation {
+      width: 50px;
+      height: 4px;
+      background-color: #747cdf;
+      margin: 0 auto 20px;
+  }
+  
+  /* Flexbox pour disposer la partie gauche et droite du formulaire */
+  .corps-formulaire {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+  }
+  
+  /* Partie gauche et droite */
+  .gauche, .droite {
+      width: 48%;
+  }
+  
+  /* Wrapper pour l'icône et le champ */
+  .input-wrapper {
+      display: flex;
+      align-items: center;
+      border: 1px solid #c9c9c9;
+      border-radius: 5px;
+      padding: 5px;
+      background-color: #fff;
+      width: 100%;
+  }
+  
+  /* Style de l'icône */
+  .input-wrapper i {
+      color: #747cdf;
+      margin-right: 8px;
+      font-size: 1.2em;
+  }
+  
+  /* Style des champs de saisie */
+  .input-wrapper input[type="text"],
+  .input-wrapper input[type="email"] {
+      border: none;
+      outline: none;
+      font-size: 14px;
+      width: 100%;
+      padding: 10px 0;
+      box-sizing: border-box;
+  }
+  
+  /* Style spécifique pour le textarea */
+  .groupe textarea {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #747cdf;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      resize: none;
+      height: 100px;
+      outline: none;
+  }
+  
+  /* Pied de formulaire - Bouton */
+  .pied-formulaire {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+  }
+  
+  .pied-formulaire button {
+      background-color: #747cdf;
+      color: white;
+      font-size: 15px;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      transition: transform 0.5s;
+  }
+  
+  .pied-formulaire button:hover {
+      transform: scale(1.05);
+  }
+  
+  /* Ajustements pour les petits écrans */
+  @media screen and (max-width: 920px) {
+      .corps-formulaire {
+          flex-direction: column;
+      }
+  
+      .gauche, .droite {
+          width: 100%;
+      }
+  }
+  
+  

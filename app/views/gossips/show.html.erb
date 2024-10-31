@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title"><%= @gossip.title %></h1>
+      <p class="card-text"><%= @gossip.content %></p>
+      <p class="card-text">
+        Par 
+        <span class="small">
+          <%= link_to @gossip.user.name, user_path(@gossip.user) %><br>
+          Ville de l'auteur : <%= link_to @gossip.user.city.name, city_path(@gossip.user.city) %>
+          </span> <!-- Nom de l'auteur en plus petit -->
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Créé le : <%= @gossip.created_at.strftime("%d/%m/%Y") %></small>
+      </p>
+      <p></p>
+      <%= link_to 'Modifier ce potin', edit_gossip_path(@gossip), class: 'btn btn-warning' %>
+      <%= link_to 'Supprimer ce potin', gossip_path(@gossip), method: :delete, data: { confirm: 'Es-tu sûr ?' }, class: 'btn btn-danger' %>
+
+
+    </div>
+  </div>
+</div>
