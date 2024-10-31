@@ -28,9 +28,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :cities
-
   resources :sessions, only: [:new, :create, :destroy]
-
   get "login", to: "sessions#new", as: "login"# Route pour la connexion
   post "login", to: "sessions#create" # Route pour la création de session
   delete "logout", to: "sessions#destroy", as: "logout" #Route pour la déconnexion

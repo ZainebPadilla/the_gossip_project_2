@@ -18,51 +18,55 @@ User.destroy_all
 City.destroy_all
 
 10.times do |index|
-  City.create(id: index+1, name: Faker::Address.city.upcase)
+  City.create(name: Faker::Address.city.upcase)
 end
-
-
-
 
 10.times do |index|
-  first_name = Faker::Name.first_name
-  last_name = Faker::Name.last_name
-  description = Faker::Quote.yoda
-  email = Faker::Internet.email
-  age = rand(18..100)
-  u = User.create(id: index+1, first_name: first_name, last_name: last_name, description: description, email: email, age: age, city_id: index+1, password: "jeanPaul42")
+  User.create(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    description: Faker::Quote.yoda,
+    email: Faker::Internet.email,
+    age: rand(18..100),
+    city_id: rand(1..10), 
+    password: "jeanPaul42"
+  )
 end
 
 
+
+
+20.times do
+  Gossip.create(
+    title: Faker::Movie.title,
+    content: Faker::TvShows::DrWho.quote,
+    user_id: rand(1..10) # Assurez-vous que l'utilisateur existe
+  )
+end
+
+
+
+10.times do
+  Tag.create(title: "##{Faker::Emotion.noun}")
+end
 
 
 20.times do |index|
-  title = Faker::Movie.title
-  content = Faker::TvShows::DrWho.quote
-  Gossip.create(id: index+1, title: title, content: content, user_id: rand(1..10))
-end
-
-
-
-10.times do |index|
-  Tag.create(id: index+1, title: "##{Faker::Emotion.noun}")
-end
-
-
-20.times do |index|
-  gossip = Gossip.find(index+1)
+  gossip = Gossip.find_by(id: index + 1) 
+  next unless gossip 
   tag = Tag.find(rand(1..10))
-  TaggedGossip.create(id: index+1, gossip_id: gossip.id, tag_id: tag.id)
+  TaggedGossip.create(gossip_id: gossip.id, tag_id: tag.id)
 end
 
 
 
-20.times do |index|
-  content = Faker::Books::Dune.quote
-  PrivateMessage.create(id: index+1, content: content, recipient_id: rand(1..10), sender_id: rand(1..10))
+20.times do
+  PrivateMessage.create(content: Faker::Books::Dune.quote, recipient_id: rand(1..10), sender_id: rand(1..10))
 end
 
-50.times do |index|
-  content = Faker::Books::Lovecraft.sentence
-  Comment.create(id: index+1, content: content, user_id: rand(1..10), gossip_id: rand(1..20))
+50.times do
+  gossip = Gossip.find_by(id: rand(1..20)) # Changez ici aussi pour éviter les erreurs
+  next unless gossip # Ajoutez cette ligne pour éviter une erreur si le gossip n'existe pas
+
+  Comment.create(content: Faker::Books::Lovecraft.sentence, user_id: rand(1..10), gossip_id: gossip.id)
 end

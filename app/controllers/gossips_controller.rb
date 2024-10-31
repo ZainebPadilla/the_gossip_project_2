@@ -1,6 +1,7 @@
 class GossipsController < ApplicationController
 
-  
+  before_action :authenticate_user, only: [:index, :new, :create, :edit, :update, :destroy]
+
   def index
     @gossips = Gossip.all
   end
@@ -12,7 +13,6 @@ class GossipsController < ApplicationController
     @comments = @gossip.comments
   end
 
-  before_action :authenticate_user, only: [ :create, :new, :edit, :update, :destroy ]
 
   def new
     @gossip = Gossip.new
